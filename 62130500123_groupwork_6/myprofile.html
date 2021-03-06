@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Vue Js - HelloWorld App</title>
+
+  <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+  <!-- Using via Google Web Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- https://tailwindcss.com/docs/installation -->
+  <!-- Using Tailwind via CDN -->
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+  <!-- Vue CDN -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+
+</head>
+
+<body>
+  <div id="app" class="w-screen h-screen flex justify-center items-center">
+    <div class="container mx-auto max-w-sm rounded-lg overflow-hidden shadow-lg my-2 bg-white">
+      <div class="relative z-10" style="clip-path: polygon(0 0, 100% 0, 100% 95%, 0 calc(100% - 5vw));">
+        <img v-bind:src="profilepic" class="w-full"/>
+      </div>
+      <div  class="relative flex justify-between items-center flex-row pl-4 pr-6 z-50 -mt-20">
+        <h1 class="flex items-center text-gray-800 text-2xl font-medium">Edit Profile</h1>
+        <a v-bind:href="url" class="focus:outline-none">
+          <span class="p-3 bg-red-600 rounded-full hover:bg-red-500 focus:bg-red-700 transition ease-in duration-200  transform scale-150  material-icons text-white">
+            add
+          </span>
+        </a>
+      </div>
+
+      <form @submit.prevent="checkForm">
+        <div class="container px-5 mt-1 ">
+            
+            
+            <div class="flex flex-col">
+              <label for="name" class="text-sm leading-7 text-gray-600">Name</label>
+              <input type="text" id="name" v-model="formdata.name" name="name" class="bg-gray-100 rounded px-3 py-2 mb-2">
+              <display-error :errors="errors" field="name"></display-error>
+            </div>
+            <div class="flex flex-col">
+              <label for="username" class="text-sm leading-7 text-gray-600">Username</label>
+              <input type="text" id="username" v-model="formdata.username" name="username" class="bg-gray-100 rounded px-4 py-2 mb-2">
+              <display-error :errors="errors" field="username"></display-error>
+            </div>
+            <div class="flex flex-col">
+              <label for="password" class="text-sm leading-7 text-gray-600">Password</label>
+              <input type="password" id="password"  v-model="formdata.password" name="password" class="bg-gray-100 rounded px-4 py-2 mb-2">
+              <display-error :errors="errors" field="password"></display-error>
+            </div>
+            <div class="flex flex-col">
+              <label for="email" class="text-sm leading-7 text-gray-600">Email</label>
+              <input type="text" id="email" v-model="formdata.email" name="email" class="bg-gray-100 rounded px-4 py-2 mb-2">
+              <display-error :errors="errors" field="email"></display-error>
+            </div>
+            <div class="flex flex-col">
+              <label for="phone"class="text-sm leading-7 text-gray-600">Phone Number</label>
+              <input type="text" id="phone" v-model="formdata.phone" name="phone" class="bg-gray-100 rounded px-4 py-2 mb-2">
+              <display-error :errors="errors" field="phone"></display-error>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+ 
+                <div class="flex flex-col ">
+                    <label for="faculty"class="text-sm leading-7 text-gray-600">Faculty</label>
+                    <select id="faculty" v-model="formdata.faculty" name="faculty" class="bg-gray-100 rounded px-4 py-2 mb-3">
+                      <option v-for="faculty in faculty_lists" :value="faculty.faculty_id">
+                          {{faculty.faculty_name}}
+                      </option>
+                    </select>
+                    <display-error :errors="errors" field="faculty"></display-error>
+                </div>
+                <div class="flex flex-col ">
+                  <label for="university"class="text-sm leading-7 text-gray-600">University</label>
+                  <select id="university" v-model="formdata.university" name="university" class="bg-gray-100 rounded px-4 py-2 mb-3">
+                    <option v-for="university in university_lists" :value="university.university_id">
+                        {{university.university_name}}
+                    </option>
+                  </select>
+                  <display-error :errors="errors" field="university"></display-error>
+              </div>
+            </div>
+                <div>
+                    <input type="submit" value="Submit" class=" mx-28 mt-4 mb-7 px-10 py-3 text-white text-lg font-normal bg-red-500 rounded-2xl hover:bg-red-600 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">
+                </div>
+            
+        </div>                            
+      </form>
+    </div>
+  </div>
+
+
+
+  <!-- my profile.js -->
+  <script src="./profile.js"></script>
+</body>
+
+</html>
